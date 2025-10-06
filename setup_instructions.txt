@@ -1,0 +1,232 @@
+🚀 ALADDIN TRADING PLATFORM - SETUP INSTRUCTIONS
+=====================================================
+
+This is a comprehensive BlackRock Aladdin clone with full Groww API integration,
+advanced risk analytics, portfolio management, and real-time trading capabilities.
+
+📋 PREREQUISITES
+================
+
+1. Python 3.11+ installed
+2. Node.js 18+ and Yarn installed
+3. Redis server (for caching)
+4. MongoDB (for data storage)
+5. Groww Trading API subscription (₹499/month)
+6. VS Code with Python and JavaScript extensions
+
+🔧 BACKEND SETUP
+================
+
+1. Navigate to backend directory:
+   cd /app/backend
+
+2. Create and activate virtual environment:
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+3. Install dependencies:
+   pip install -r requirements.txt
+
+4. Environment Configuration:
+   cp .env.example .env
+   
+   Edit .env file with your Groww API credentials:
+   GROWW_API_KEY=your_groww_api_key
+   GROWW_API_SECRET=your_groww_api_secret
+   GROWW_TOTP_SEED=your_totp_seed
+   GROWW_ALLOWED_IP=your_ip_address
+
+5. Start Redis server:
+   redis-server
+
+6. Start MongoDB:
+   mongod
+
+7. Run the backend server:
+   python -m uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+
+   Backend will be available at: http://localhost:8001
+   API Documentation: http://localhost:8001/api/docs
+
+🎨 FRONTEND SETUP
+=================
+
+1. Navigate to frontend directory:
+   cd /app/frontend
+
+2. Install dependencies:
+   yarn install
+
+3. Start the development server:
+   yarn start
+
+   Frontend will be available at: http://localhost:3000
+
+📊 GROWW API CONFIGURATION
+==========================
+
+To get your Groww API credentials:
+
+1. Sign up at https://groww.in
+2. Enable F&O trading if required
+3. Subscribe to Trading API (₹499/month + taxes)
+4. Go to Profile → Trading APIs
+5. Generate API Key and Secret
+6. Setup TOTP using any authenticator app
+7. Get your TOTP seed for the .env file
+8. Whitelist your IP address
+
+🔧 VS CODE SETUP
+================
+
+1. Install required extensions:
+   - Python (Microsoft)
+   - Pylance
+   - ES7+ React/Redux/React-Native snippets
+   - Prettier - Code formatter
+   - REST Client (for API testing)
+
+2. Configure VS Code settings.json:
+   {
+     "python.defaultInterpreterPath": "/app/backend/.venv/bin/python",
+     "python.formatting.provider": "black",
+     "editor.formatOnSave": true,
+     "editor.codeActionsOnSave": {
+       "source.organizeImports": true
+     }
+   }
+
+3. Create launch.json for debugging:
+   {
+     "version": "0.2.0",
+     "configurations": [
+       {
+         "name": "Python: FastAPI",
+         "type": "python",
+         "request": "launch",
+         "module": "uvicorn",
+         "args": ["main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"],
+         "cwd": "${workspaceFolder}/backend",
+         "console": "integratedTerminal"
+       }
+     ]
+   }
+
+🧪 TESTING THE APPLICATION
+==========================
+
+1. Health Check:
+   curl http://localhost:8001/health
+
+2. Market Data Test:
+   curl "http://localhost:8001/api/v1/market/ltp/RELIANCE?exchange=NSE"
+
+3. Portfolio Test:
+   curl http://localhost:8001/api/v1/portfolio/
+
+4. Frontend Test:
+   Open http://localhost:3000 in browser
+
+🔍 MONITORING & DEBUGGING
+=========================
+
+1. View Backend Logs:
+   tail -f /app/backend/logs/aladdin_trading.log
+
+2. Monitor Metrics:
+   curl http://localhost:8001/metrics
+
+3. Detailed Health Check:
+   curl http://localhost:8001/health/detailed
+
+4. Check Authentication Status:
+   The app will show authentication status in health checks
+
+📚 API DOCUMENTATION
+===================
+
+Interactive API Documentation is available at:
+- Swagger UI: http://localhost:8001/api/docs
+- ReDoc: http://localhost:8001/api/redoc
+
+Key API Endpoints:
+- Market Data: /api/v1/market/*
+- Portfolio: /api/v1/portfolio/*
+- Orders: /api/v1/orders/*
+- Analytics: /api/v1/analytics/*
+
+🚨 TROUBLESHOOTING
+==================
+
+Common Issues:
+
+1. Authentication Errors:
+   - Verify Groww API credentials in .env
+   - Check if TOTP seed is correct
+   - Ensure IP is whitelisted in Groww account
+
+2. Redis Connection Errors:
+   - Start Redis server: redis-server
+   - Check Redis is running: redis-cli ping
+
+3. MongoDB Connection Errors:
+   - Start MongoDB: mongod
+   - Check connection string in .env
+
+4. Port Already in Use:
+   - Backend: Change port in main.py
+   - Frontend: Set PORT=3001 in frontend/.env
+
+5. Package Installation Issues:
+   - Update pip: pip install --upgrade pip
+   - Clear cache: pip cache purge
+   - Use yarn instead of npm for frontend
+
+🔒 SECURITY NOTES
+=================
+
+1. Never commit .env files to version control
+2. Use strong SECRET_KEY in production
+3. Enable HTTPS in production
+4. Set proper CORS origins for production
+5. Use rate limiting in production
+6. Monitor API usage to stay within Groww limits
+
+🚀 PRODUCTION DEPLOYMENT
+=======================
+
+For production deployment:
+
+1. Set ENVIRONMENT=production in .env
+2. Use proper database URLs (not localhost)
+3. Set up load balancer
+4. Enable SSL/TLS
+5. Use process managers (PM2, supervisor)
+6. Set up monitoring (Prometheus, Grafana)
+7. Configure log aggregation
+
+📞 SUPPORT
+==========
+
+For issues:
+1. Check logs in /app/backend/logs/
+2. Review API documentation
+3. Check Groww API status
+4. Verify all services are running
+
+🎉 FEATURES INCLUDED
+===================
+
+✅ Real-time market data with Groww API
+✅ Portfolio management and analytics
+✅ Advanced risk analytics and stress testing
+✅ Order management and trading
+✅ Performance attribution analysis
+✅ Interactive dashboards
+✅ Comprehensive logging and monitoring
+✅ Error handling and retry logic
+✅ Caching for performance
+✅ Rate limiting for API protection
+
+The application is now ready for development and testing!
+Connect your Groww API credentials and start trading! 🚀
