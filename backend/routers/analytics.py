@@ -8,8 +8,31 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Optional
 from datetime import datetime, timedelta
 
-# Import mock data temporarily (will be replaced with actual service)
-from ...frontend.src.data.mockData import analytics, riskMetrics, chartData
+# Mock data - will be replaced with actual Groww API integration
+analytics = {
+    "attribution": [
+        {"factor": "Security Selection", "contribution": 2.3},
+        {"factor": "Sector Allocation", "contribution": 1.8}
+    ],
+    "monthlyReturns": [
+        {"month": "Jan 2024", "portfolio": 2.3, "benchmark": 1.8}
+    ]
+}
+
+riskMetrics = {
+    "portfolioRisk": {
+        "var95": 156780,
+        "var99": 234560,
+        "expectedShortfall": 287645,
+        "trackingError": 2.45,
+        "informationRatio": 1.23,
+        "correlationToBenchmark": 0.89
+    },
+    "sectorExposure": [
+        {"sector": "IT Services", "allocation": 43.7, "risk": "Medium"}
+    ],
+    "stressTests": []
+}
 
 logger = structlog.get_logger(__name__)
 router = APIRouter()
