@@ -47,8 +47,8 @@ class Settings(BaseSettings):
     structured_logging: bool = Field(default=True, env="STRUCTURED_LOGGING")
     
     # Security Configuration
-    allowed_hosts: List[str] = Field(default=["localhost", "127.0.0.1"], env="ALLOWED_HOSTS")
-    cors_origins: List[str] = Field(default=["http://localhost:3000"], env="CORS_ORIGINS")
+    allowed_hosts: str = Field(default="localhost,127.0.0.1", env="ALLOWED_HOSTS")
+    cors_origins: str = Field(default="http://localhost:3000,http://127.0.0.1:3000", env="CORS_ORIGINS")
     
     # Performance Configuration
     max_workers: int = Field(default=4, env="MAX_WORKERS")
