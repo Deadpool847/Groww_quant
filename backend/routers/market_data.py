@@ -7,8 +7,8 @@ import structlog
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Optional
 
-from ..services.market_data_service import get_market_data_service, MarketDataService
-from ..schemas.market_data import (
+from services.market_data_service import get_market_data_service, MarketDataService
+from schemas.market_data import (
     MarketQuoteResponse, LTPResponse, OHLCResponse,
     HistoricalDataResponse, MarketOverviewResponse
 )
