@@ -10,7 +10,7 @@ from typing import Optional, Dict, Any
 from datetime import datetime, timedelta
 from growwapi import GrowwAPI
 from growwapi.groww.exceptions import GrowwAPIAuthenticationException
-from ..config import get_settings
+from config import get_settings
 
 logger = structlog.get_logger(__name__)
 
