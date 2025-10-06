@@ -69,17 +69,11 @@ class Settings(BaseSettings):
     var_confidence_level: float = Field(default=0.95, env="VAR_CONFIDENCE_LEVEL")
     stress_test_scenarios: int = Field(default=10, env="STRESS_TEST_SCENARIOS")
     
-    @validator('allowed_hosts', pre=True)
-    def parse_allowed_hosts(cls, v):
-        if isinstance(v, str):
-            return [host.strip() for host in v.split(',')]
-        return v
+    def get_allowed_hosts(self) -> List[str]:
+        return [host.strip() for host in self.allowed_hosts.split(',')]
     
-    @validator('cors_origins', pre=True)
-    def parse_cors_origins(cls, v):
-        if isinstance(v, str):
-            return [origin.strip() for origin in v.split(',')]
-        return v
+    def get_cors_origins(self) -> List[str]:
+        return [origin.strip() for origin in self.cors_origins.split(',')]
     
     @validator('log_level')
     def validate_log_level(cls, v):
