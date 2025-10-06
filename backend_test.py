@@ -59,7 +59,13 @@ class AladdinTester:
             test_name = f"{method} {endpoint}"
         
         try:
-            url = f"{BACKEND_URL}{endpoint}" if endpoint.startswith('/') else f"{API_BASE}/{endpoint}"
+            # Handle different endpoint formats
+            if endpoint.startswith('/api/'):
+                url = f"{BACKEND_URL}{endpoint}"
+            elif endpoint.startswith('/'):
+                url = f"{API_BASE}{endpoint}"
+            else:
+                url = f"{API_BASE}/{endpoint}"
             
             if method.upper() == 'GET':
                 response = self.session.get(url, timeout=30)
