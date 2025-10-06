@@ -20,10 +20,10 @@ from prometheus_client import Counter, Histogram, generate_latest
 from starlette.responses import Response
 
 # Import configurations and services
-from .config import get_settings, LOGGING_CONFIG
-from .auth.groww_auth import get_auth_manager, cleanup_auth
-from .services.market_data_service import get_market_data_service
-from .routers import market_data, portfolio, orders, analytics
+from config import get_settings, LOGGING_CONFIG
+from auth.groww_auth import get_auth_manager, cleanup_auth
+from services.market_data_service import get_market_data_service
+from routers import market_data, portfolio, orders, analytics
 
 # Configure structured logging
 structlog.configure(
