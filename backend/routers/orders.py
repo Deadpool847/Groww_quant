@@ -8,8 +8,19 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Body
 from typing import List, Optional
 from datetime import datetime
 
-# Import mock data temporarily (will be replaced with actual service)
-from ...frontend.src.data.mockData import orders
+# Mock data - will be replaced with actual Groww API integration
+orders = [
+    {
+        'id': 'ord_1',
+        'symbol': 'RELIANCE',
+        'side': 'BUY',
+        'quantity': 100,
+        'price': 2587.30,
+        'orderType': 'LIMIT',
+        'status': 'FILLED',
+        'timestamp': '2024-01-06T09:15:30Z'
+    }
+]
 
 logger = structlog.get_logger(__name__)
 router = APIRouter()
