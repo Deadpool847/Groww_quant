@@ -12,8 +12,8 @@ from typing import Dict, Any, List
 import sys
 import os
 
-# Backend URL from environment
-BACKEND_URL = "https://aladdin-clone-1.preview.emergentagent.com"
+# Backend URL - Use internal URL for testing since external routing has issues
+BACKEND_URL = "http://localhost:8001"
 API_BASE = f"{BACKEND_URL}/api/v1"
 
 class AladdinTester:
