@@ -290,7 +290,7 @@ def create_app() -> FastAPI:
             market_service = getattr(app.state, 'market_service', None)
             
             detailed_status = {
-                **health_data.body if hasattr(health_data, 'body') else health_data,
+                **(health_data.body if hasattr(health_data, 'body') else health_data),
                 "detailed_checks": {
                     "authentication": {
                         "status": "operational" if auth_manager and auth_manager.is_authenticated() else "degraded",
