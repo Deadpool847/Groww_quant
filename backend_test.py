@@ -62,6 +62,8 @@ class AladdinTester:
             # Handle different endpoint formats
             if endpoint.startswith('/api/'):
                 url = f"{BACKEND_URL}{endpoint}"
+            elif endpoint in ['/', '/health', '/health/detailed', '/metrics']:
+                url = f"{BACKEND_URL}{endpoint}"
             elif endpoint.startswith('/'):
                 url = f"{API_BASE}{endpoint}"
             else:
