@@ -7,8 +7,31 @@ import structlog
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Optional
 
-# Import mock data temporarily (will be replaced with actual service)
-from ...frontend.src.data.mockData import portfolios, holdings
+# Mock data - will be replaced with actual Groww API integration
+portfolios = [
+    {
+        'id': 'port_1',
+        'name': 'Growth Portfolio',
+        'value': 2847500,
+        'dayChange': 24750,
+        'dayChangePercent': 0.88,
+        'totalReturn': 347500,
+        'totalReturnPercent': 14.6
+    }
+]
+
+holdings = [
+    {
+        'id': 'hold_1',
+        'portfolioId': 'port_1',
+        'symbol': 'RELIANCE',
+        'name': 'Reliance Industries Ltd',
+        'quantity': 500,
+        'avgPrice': 2456.75,
+        'currentPrice': 2587.30,
+        'marketValue': 1293650
+    }
+]
 
 logger = structlog.get_logger(__name__)
 router = APIRouter()
