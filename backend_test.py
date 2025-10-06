@@ -172,7 +172,7 @@ class AladdinTester:
         print("=" * 50)
         
         # Test get all portfolios
-        result = self.test_endpoint('GET', '/portfolio/', 200, test_name="Get all portfolios")
+        result = self.test_endpoint('GET', 'portfolio/', 200, test_name="Get all portfolios")
         
         # Test specific portfolio
         self.test_endpoint('GET', '/portfolio/port_1', 200, test_name="Get specific portfolio")
