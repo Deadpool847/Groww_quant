@@ -7,8 +7,8 @@ import structlog
 from fastapi import Depends, HTTPException, Request
 from typing import Optional
 
-from .auth.groww_auth import get_authenticated_groww_client, get_auth_manager
-from .services.market_data_service import get_market_data_service
+from auth.groww_auth import get_authenticated_groww_client, get_auth_manager
+from services.market_data_service import get_market_data_service
 from growwapi import GrowwAPI
 
 logger = structlog.get_logger(__name__)
