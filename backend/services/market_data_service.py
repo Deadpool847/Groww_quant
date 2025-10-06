@@ -11,13 +11,13 @@ from growwapi.groww.exceptions import GrowwAPIException, GrowwAPIRateLimitExcept
 import redis
 import json
 
-from ..auth.groww_auth import get_authenticated_groww_client
-from ..schemas.market_data import (
+from auth.groww_auth import get_authenticated_groww_client
+from schemas.market_data import (
     MarketQuoteResponse, LTPResponse, OHLCResponse, 
     HistoricalDataResponse, CandleData, TopMoversResponse,
     MarketOverviewResponse, IndexData, SectorData
 )
-from ..config import get_settings
+from config import get_settings
 
 logger = structlog.get_logger(__name__)
 
