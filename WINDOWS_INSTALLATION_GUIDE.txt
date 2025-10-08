@@ -1,0 +1,340 @@
+🚀 BLACKROCK ALADDIN MASTERPIECE - WINDOWS INSTALLATION GUIDE
+================================================================
+
+This comprehensive guide will help you install and run the Aladdin Trading Platform
+on your Windows system with VS Code. Follow these steps carefully for a smooth setup.
+
+📋 SYSTEM REQUIREMENTS
+=====================
+
+✅ Windows 10/11 (64-bit)
+✅ 8GB+ RAM (16GB recommended for optimal performance)
+✅ 5GB+ free disk space
+✅ Internet connection for downloading dependencies
+✅ Administrator privileges for installation
+
+🛠️ PREREQUISITES INSTALLATION
+=============================
+
+1. **Install Python 3.11+**
+   - Download from: https://www.python.org/downloads/
+   - ⚠️ IMPORTANT: Check "Add Python to PATH" during installation
+   - Verify installation: Open Command Prompt and run `python --version`
+
+2. **Install Node.js 18+ LTS**
+   - Download from: https://nodejs.org/
+   - ⚠️ IMPORTANT: Choose "LTS" version for stability
+   - Verify installation: Open Command Prompt and run `node --version`
+
+3. **Install Git for Windows**
+   - Download from: https://git-scm.com/download/win
+   - Use default settings during installation
+   - Verify installation: Run `git --version`
+
+4. **Install Visual Studio Code**
+   - Download from: https://code.visualstudio.com/
+   - Install with default settings
+   - Install these extensions:
+     * Python (Microsoft)
+     * Pylance
+     * ES7+ React/Redux/React-Native snippets
+     * Prettier - Code formatter
+     * REST Client
+     * Thunder Client (for API testing)
+
+5. **Install Redis for Windows**
+   Option A - Using MSI Installer (Recommended):
+   - Download from: https://github.com/microsoftarchive/redis/releases
+   - Install Redis-x64-3.0.504.msi
+   - Start Redis service from Windows Services
+
+   Option B - Using WSL2:
+   - Enable WSL2: Run PowerShell as Admin, execute: `wsl --install`
+   - Install Ubuntu from Microsoft Store
+   - In Ubuntu terminal: `sudo apt update && sudo apt install redis-server`
+   - Start Redis: `sudo service redis-server start`
+
+6. **Install MongoDB Community Edition**
+   - Download from: https://www.mongodb.com/try/download/community
+   - Choose Windows x64 MSI
+   - During installation, check "Install MongoDB as a Service"
+   - MongoDB will start automatically as Windows Service
+
+📦 AUTOMATED INSTALLATION PROCESS
+================================
+
+**OPTION 1: Using Automated Batch File (Recommended)**
+
+1. Copy the project files to: `C:\AladdinTrading\`
+2. Right-click on `install_aladdin.bat` and select "Run as Administrator"
+3. Follow the prompts in the installation window
+4. The script will automatically:
+   - Create Python virtual environment
+   - Install all backend dependencies
+   - Install all frontend dependencies
+   - Set up environment files
+   - Test all components
+
+**OPTION 2: Manual Installation**
+
+If the automated script fails, follow these manual steps:
+
+🔧 BACKEND SETUP (Manual)
+=========================
+
+1. **Open Command Prompt as Administrator**
+   
+2. **Navigate to project directory:**
+   ```cmd
+   cd C:\AladdinTrading\backend
+   ```
+
+3. **Create and activate virtual environment:**
+   ```cmd
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+   
+4. **Upgrade pip and install dependencies:**
+   ```cmd
+   python -m pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+   
+5. **Set up environment file:**
+   ```cmd
+   copy .env.example .env
+   ```
+   
+6. **Edit .env file with your Groww API credentials:**
+   Open `.env` in notepad and replace placeholder values:
+   ```
+   GROWW_API_KEY=your_actual_groww_api_key
+   GROWW_API_SECRET=your_actual_groww_api_secret  
+   GROWW_TOTP_SEED=your_actual_totp_seed
+   GROWW_ALLOWED_IP=your_actual_ip_address
+   ```
+
+🎨 FRONTEND SETUP (Manual)  
+==========================
+
+1. **Open new Command Prompt**
+
+2. **Navigate to frontend directory:**
+   ```cmd
+   cd C:\AladdinTrading\frontend
+   ```
+
+3. **Install Yarn (if not installed):**
+   ```cmd
+   npm install -g yarn
+   ```
+
+4. **Install dependencies:**
+   ```cmd
+   yarn install
+   ```
+
+🚀 RUNNING THE APPLICATION
+=========================
+
+**Method 1: Using Batch Files (Easiest)**
+- Double-click `start_backend.bat` to start the backend server
+- Double-click `start_frontend.bat` to start the frontend
+- Double-click `start_services.bat` to start Redis and MongoDB
+
+**Method 2: Using VS Code (Recommended for Development)**
+
+1. **Open VS Code:**
+   ```cmd
+   code C:\AladdinTrading
+   ```
+
+2. **Open integrated terminal in VS Code (Ctrl + `)**
+
+3. **Start Backend:**
+   ```cmd
+   cd backend
+   venv\Scripts\activate
+   python main.py
+   ```
+
+4. **Open new terminal for Frontend:**
+   ```cmd
+   cd frontend  
+   yarn start
+   ```
+
+5. **Verify Services:**
+   - Backend: http://localhost:8001/health
+   - Frontend: http://localhost:3000
+   - API Docs: http://localhost:8001/api/docs
+
+🔧 VS CODE CONFIGURATION
+========================
+
+1. **Create .vscode/settings.json:**
+   ```json
+   {
+     "python.defaultInterpreterPath": "./backend/venv/Scripts/python.exe",
+     "python.formatting.provider": "black",
+     "editor.formatOnSave": true,
+     "editor.codeActionsOnSave": {
+       "source.organizeImports": true
+     },
+     "python.linting.enabled": true,
+     "python.linting.pylintEnabled": false,
+     "python.linting.flake8Enabled": true
+   }
+   ```
+
+2. **Create .vscode/launch.json for debugging:**
+   ```json
+   {
+     "version": "0.2.0",
+     "configurations": [
+       {
+         "name": "Python: FastAPI",
+         "type": "python", 
+         "request": "launch",
+         "program": "${workspaceFolder}/backend/main.py",
+         "console": "integratedTerminal",
+         "cwd": "${workspaceFolder}/backend"
+       }
+     ]
+   }
+   ```
+
+🧪 TESTING THE INSTALLATION
+===========================
+
+1. **Health Check Backend:**
+   ```cmd
+   curl http://localhost:8001/health
+   ```
+   
+2. **Test Frontend:**
+   Open http://localhost:3000 in browser
+
+3. **Test API:**
+   ```cmd
+   curl http://localhost:8001/api/v1/portfolio/
+   ```
+
+4. **Check Services:**
+   - Redis: `redis-cli ping` (should return "PONG")
+   - MongoDB: Open MongoDB Compass and connect to `mongodb://localhost:27017`
+
+🐛 TROUBLESHOOTING
+==================
+
+**Common Issues & Solutions:**
+
+1. **"Python not found"**
+   - Reinstall Python and check "Add to PATH"
+   - Restart Command Prompt after installation
+
+2. **"Permission denied" errors**
+   - Run Command Prompt as Administrator
+   - Check Windows Defender/Antivirus settings
+
+3. **"Module not found" errors**
+   - Ensure virtual environment is activated: `venv\Scripts\activate`
+   - Reinstall dependencies: `pip install -r requirements.txt`
+
+4. **Port already in use**
+   - Kill processes: `netstat -ano | findstr :8001` then `taskkill /PID <PID> /F`
+   - Or change ports in configuration files
+
+5. **Redis connection errors**
+   - Start Redis service: `net start redis` (as Admin)
+   - Or start Redis server manually: `redis-server`
+
+6. **MongoDB connection errors**  
+   - Start MongoDB service: `net start MongoDB` (as Admin)
+   - Check MongoDB is running: `mongo --eval "db.adminCommand('ismaster')"`
+
+7. **Frontend build errors**
+   - Clear cache: `yarn cache clean`
+   - Delete node_modules and reinstall: `rmdir /s node_modules && yarn install`
+
+8. **VS Code Python interpreter not found**
+   - Ctrl+Shift+P → "Python: Select Interpreter"
+   - Choose: `./backend/venv/Scripts/python.exe`
+
+📞 GETTING HELP
+===============
+
+If you encounter issues:
+
+1. **Check logs:**
+   - Backend logs: `C:\AladdinTrading\backend\logs\aladdin_trading.log`
+   - Frontend console: Press F12 in browser
+
+2. **Verify all services are running:**
+   - Run `check_services.bat` to verify all components
+
+3. **Test individual components:**
+   - Use the provided test batch files in `/tests/` directory
+
+4. **Common commands for troubleshooting:**
+   ```cmd
+   # Check running processes
+   netstat -ano | findstr :8001
+   netstat -ano | findstr :3000
+   
+   # Check Python environment
+   python --version
+   pip list
+   
+   # Check Node.js environment  
+   node --version
+   yarn --version
+   ```
+
+🎉 SUCCESS INDICATORS
+====================
+
+Your installation is successful when:
+
+✅ Backend server starts without errors at http://localhost:8001
+✅ Frontend loads at http://localhost:3000 showing the Aladdin dashboard
+✅ Health check returns: `{"status":"healthy"}`
+✅ API documentation accessible at http://localhost:8001/api/docs
+✅ Portfolio data loads in the frontend dashboard
+✅ No error messages in browser console or terminal
+
+🔒 NEXT STEPS - GROWW API SETUP
+===============================
+
+1. **Sign up for Groww Trading Account:**
+   - Visit: https://groww.in
+   - Complete KYC verification
+   - Enable F&O trading if needed
+
+2. **Subscribe to Groww API:**
+   - Go to Profile → Trading APIs
+   - Subscribe to API access (₹499/month)
+   - Generate API Key and Secret
+
+3. **Set up TOTP Authentication:**
+   - Download Google Authenticator or similar app
+   - Scan QR code provided by Groww
+   - Save TOTP seed for .env configuration
+
+4. **Update .env file with real credentials**
+
+5. **Test live market data connection**
+
+🚀 PRODUCTION DEPLOYMENT NOTES
+==============================
+
+For production deployment:
+- Use environment-specific .env files
+- Enable HTTPS with SSL certificates
+- Set up proper logging and monitoring
+- Use process managers for auto-restart
+- Configure firewall rules
+- Set up backup strategies for database
+
+The Aladdin Trading Platform is now ready for development and trading! 🎯
